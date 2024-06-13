@@ -4,9 +4,10 @@ import java.sql.*;
 import java.util.Scanner;
 
     public class TicTacToeTerminal {
-        private static final String DB_URL = "jdbc:mysql://localhost:3306/TicTacToeDataBase";
+        private static final String DB_URL = "jdbc:mysql://localhost:3306/tictactoedatabase";
         private static final String DB_USER = "root";
         private static final String DB_PASSWORD = "naysa";
+
 
         private static final String PLAYER_X = "\u001B[38;5;208mX\u001B[0m"; // Orange X
 
@@ -181,13 +182,7 @@ import java.util.Scanner;
                 stmt.setString(2, code);
                 ResultSet rs = stmt.executeQuery();
 
-                if (rs.next()) {
-                    userId = rs.getInt("id");
-                    System.out.println("Inloggen succesvol!");
-                } else {
-                    System.out.println("Ongeldige naam of code, probeer opnieuw.");
-                    login();
-                }
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
