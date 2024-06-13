@@ -2,6 +2,8 @@ package tictactoe;
 
 import java.sql.*;
 import java.util.Scanner;
+import java.sql.Connection;
+
 
     public class TicTacToeTerminal {
         private static final String DB_URL = "jdbc:mysql://localhost:3306/tictactoedatabase";
@@ -177,10 +179,18 @@ import java.util.Scanner;
 
             try {
                 String query = "SELECT id FROM Users WHERE name = ? AND code = ?";
-                PreparedStatement stmt = connection.prepareStatement(query);
+                PreparedStatement stmt = connection.prepareStatement(query);1
                 stmt.setString(1, name);
                 stmt.setString(2, code);
                 ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    userId = rs.getInt("id");
+                    System.out.println("Inloggen succesvol!");
+                } else {
+                    System.out.println("Ongeldige naam of code, probeer opnieuw.");
+                    login();
+                }
 
 
             } catch (SQLException e) {
@@ -246,6 +256,7 @@ import java.util.Scanner;
                 connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                 System.out.println("Verbonden met de database.");
             } catch (SQLException e) {
+                System.out.println("Kon geen verbinding maken met de database");
                 e.printStackTrace();
             }
         }
