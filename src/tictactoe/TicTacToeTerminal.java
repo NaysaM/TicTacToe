@@ -179,7 +179,7 @@ import java.sql.Connection;
 
             try {
                 String query = "SELECT id FROM Users WHERE name = ? AND code = ?";
-                PreparedStatement stmt = connection.prepareStatement(query);1
+                PreparedStatement stmt = connection.prepareStatement(query);
                 stmt.setString(1, name);
                 stmt.setString(2, code);
                 ResultSet rs = stmt.executeQuery();
